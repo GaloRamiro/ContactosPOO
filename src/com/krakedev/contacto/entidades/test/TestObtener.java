@@ -1,0 +1,27 @@
+package com.krakedev.contacto.entidades.test;
+
+import com.krakedev.contacto.entidades.Contacto;
+import com.krakedev.contacto.entidades.Directorio;
+
+public class TestObtener {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Directorio dir = new Directorio();
+		Contacto c1 = new Contacto();
+		c1.setNombre("Galo");
+		Contacto c2 = new Contacto();
+		c2.setNombre("Juan");
+		Contacto c3 = new Contacto();
+		c3.setNombre("Carlos");
+
+		dir.agregarContacto(c1);
+		dir.agregarContacto(c2);
+		dir.agregarContacto(c3);
+
+		Contacto contactoRecueprado;
+		contactoRecueprado = dir.obtenerContacto(2);
+		System.out.println("Contacto Recuperado: "+contactoRecueprado.getNombre());
+	}
+
+}
