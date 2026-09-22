@@ -17,8 +17,15 @@ public class Directorio {
 		this.contactos = contactos;
 	}
 
-	public void agregarContacto(Contacto contacto) {
-		contactos.add(contacto);
+	public boolean agregarContacto(Contacto contacto) {
+		Contacto existe = buscarContacto(contacto.getCelular());
+		if (existe == null) {
+			contactos.add(contacto);
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 	public int obtenerCantidadContactos() {
@@ -26,9 +33,62 @@ public class Directorio {
 		cantidad = contactos.size();
 		return cantidad;
 	}
-	
-	public Contacto obtenerContacto(int posicion){
-		return
-				contactos.get(posicion);
+
+	public Contacto obtenerContacto(int posicion) {
+		return contactos.get(posicion);
+	}
+
+	public void imprimirContacto() {
+		for (int i = 0; i < contactos.size(); i++) {
+			Contacto contacto = contactos.get(i);
+			System.out.println("Nombre: " + contacto.getNombre());
+		}
+
+	}
+
+	public String recuperarNumero(int posicion) {
+		Contacto c = contactos.get(posicion);
+		String numero = c.getCelular();
+		return numero;
+	}
+
+	public Contacto buscarContacto(String numero) {
+		for (int i = 0; i < contactos.size(); i++) {
+			Contacto c = contactos.get(i);
+
+			if (c.getCelular().equals(numero)) {
+				return c;
+			}
+
+		}
+		return null;
+	}
+
+	public boolean eliminarContacto(String numero) {
+		Contacto encontrado = buscarContacto(numero);
+		if (encontrado == null) {
+			return false;
+		} else {
+			contactos.remove(encontrado);
+			return true;
+
+		}
+
+	}
+
+	public ArrayList<Contacto> buscarContactosCoincidencias(String subcadena) {
+
+		ArrayList<Contacto> encontrados = new ArrayList<Contacto>();
+
+		for (int i = 0; i < contactos.size(); i++) {
+
+			Contacto c = contactos.get(i);
+
+			if (c.getNombre().startsWith(subcadena)) {
+				encontrados.add(c);
+			}
+		}
+
+		return encontrados;
 	}
 }
